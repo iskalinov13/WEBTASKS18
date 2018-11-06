@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <style>
+        #news {
+            border: 1px solid red;
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="news"></div>
+    <button id="sport">Load Sport news</button>
+    <button id="politics">Load Politics news</button>
+    <button id="business">Load Business news</button>
+
+
+    <script>
+        var sportUrl = "http://demo4296963.mockable.io/news-sport"
+        var politicsUrl = "http://demo4296963.mockable.io/news-politics"
+        var businessUrl = "http://demo4296963.mockable.io/news-bussiness"
+        
+        var sportButton = document.querySelector("#sport")
+        var politicsButton = document.querySelector("#politics")
+        var businessButton = document.querySelector("#business")
+        var newsDiv = document.querySelector("#news")
+        function onStreamProceed(text) {
+            console.log(text);
+            newsDiv.innerHTML = text
+        }
+        function onSuccess(response) {
+            console.log(response.status);
+            response.text().then(onStreamProceed)
+            
+        }
+        function onFail(error) {
+            console.log("Error " + error);
+        }
+        sportButton.addEventListener("click", function(e) {
+            fetch(sportUrl).then(onSuccess, onFail)
+        })
+        
+        politicsButton.addEventListener("click", function(e) {
+            fetch(politicsUrl).then(onSuccess, onFail)
+        })
+        
+        businessButton.addEventListener("click", function(e) {
+            fetch(businessUrl).then(onSuccess, onFail)
+        })
+        
+    </script>
+</body>
+
+</html>
